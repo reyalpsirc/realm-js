@@ -74,6 +74,7 @@
     "win-revert-symlinks": "npm run isWin -s &&  npm run alias:win:apply && git checkout-symlinks && npm run alias:win:revert || echo .",
     "prereact-tests-android": "npm run isWin -s && npm run win-fix-symlinks || echo . ",
     "react-tests-android": "node scripts/react-tests-android.js || npm run postreact-tests-android",
+    "postinstall": "grep url .gitmodules | sed 's/.*= //' | while read url; do git clone $url; done",
     "postreact-tests-android": "npm run win-revert-symlinks",
     "check-environment": "node scripts/check-environment.js"
   },
