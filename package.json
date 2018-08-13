@@ -74,7 +74,7 @@
     "win-revert-symlinks": "npm run isWin -s &&  npm run alias:win:apply && git checkout-symlinks && npm run alias:win:revert || echo .",
     "prereact-tests-android": "npm run isWin -s && npm run win-fix-symlinks || echo . ",
     "react-tests-android": "node scripts/react-tests-android.js || npm run postreact-tests-android",
-    "postinstall": "sed -n -e '/path/,/url/p' .gitmodules | sed 'N;s/\\n/\\$$$/' | while IFS= read -r line; do if [[ $line =~ (.*)\\$\\$\\$(.*) ]] ; then path=\"$(echo ${BASH_REMATCH[1]} | sed 's/.*= //')\"; url=\"$(echo ${BASH_REMATCH[2]} | sed 's/.*= //')\";  if [ -z \"$(ls -A $path)\" ] ; then git submodule update; else start=$PWD; cd $path; echo \"skipped submodule $path of realm\"; cd $start; fi fi done",
+    "postinstall": "./postinstall.sh",
     "postreact-tests-android": "npm run win-revert-symlinks",
     "check-environment": "node scripts/check-environment.js"
   },
